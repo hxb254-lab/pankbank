@@ -45,12 +45,30 @@
       margin: 0 0 18px 0;
     }
 
+    .cta{
+      margin-top: 18px;
+      font-weight: 700;
+    }
+
     .divider{
       border: none;
       border-top: 2px solid #000;
       margin: 42px 0;
-      width: 100%;
       max-width: 760px;
+    }
+
+    .domains{
+      font-size: 16px;
+      line-height: 1.6;
+      max-width: 760px;
+    }
+
+    .domains code{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 14px;
+      background: #f3f3f3;
+      padding: 2px 6px;
+      border-radius: 6px;
     }
 
     .meta{
@@ -59,24 +77,18 @@
       margin-top: 6px;
     }
 
-    .domains{
-      font-size: 16px;
-      line-height: 1.6;
-      margin-top: 6px;
-      max-width: 760px;
+    /* Bildsektion – liggande, lågmäld */
+    .images{
+      margin: 50px 0;
+      max-width: 900px;
     }
 
-    .domains code{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size: 14px;
-      background: #f3f3f3;
-      padding: 2px 6px;
-      border-radius: 6px;
-    }
-
-    .cta{
-      margin-top: 18px;
-      font-weight: 700;
+    .images img{
+      width: 100%;
+      height: auto;
+      display: block;
+      margin-bottom: 18px;
+      filter: grayscale(100%);
     }
 
     .note{
@@ -85,42 +97,8 @@
       color: var(--muted);
     }
 
-    /* Bildsektion (förberedd för mobil/kompaktkamera-känsla) */
-    .gallery{
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-      max-width: 900px;
-    }
-
-    .shot{
-      aspect-ratio: 4 / 5;
-      background: #f2f2f2;
-      border: 2px solid #000;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      color: #777;
-    }
-
-    .shot img{
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      filter: grayscale(100%);
-    }
-
     @media (max-width: 900px){
       body{ padding: 28px; }
-      .gallery{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-
-    @media (max-width: 520px){
-      h1{ font-size: 26px; }
-      .gallery{ grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -135,19 +113,21 @@
     <h1>En modern pantbank för elektronik</h1>
 
     <p>
-      <strong>Pankbank</strong> är ett varumärke och ett koncept för en ny generation pantbank med fokus på
-      lättvärderad elektronik som mobiltelefoner, TV-apparater, laptops och spelkonsoler.
-      En tydlig, ärlig och modern tolkning av en traditionell bransch.
+      <strong>Pankbank</strong> är ett varumärke och ett koncept för en ny generation
+      pantbank med fokus på lättvärderad elektronik som mobiltelefoner, TV-apparater,
+      laptops och spelkonsoler. En tydlig, ärlig och modern tolkning av en traditionell
+      bransch.
     </p>
 
     <p class="cta">
-      Detta är ett koncept som kan <strong>förvärvas</strong>, utvecklas via <strong>partnerskap</strong>,
-      <strong>licensieras</strong> eller genom <strong>delägarskap</strong>.
+      Detta är ett koncept som kan <strong>förvärvas</strong>, utvecklas via
+      <strong>partnerskap</strong>, <strong>licensieras</strong> eller genom
+      <strong>delägarskap</strong>.
     </p>
 
     <hr class="divider">
 
-    <!-- DOMÄNER / ASSETS -->
+    <!-- DOMÄNER -->
     <p>
       I samband med konceptet finns följande domäner säkrade:
     </p>
@@ -157,25 +137,16 @@
       <div>• <code>pankbanken.com</code></div>
       <div>• <code>pankbank.com</code></div>
       <div class="meta">
-        (Visas här för att tydliggöra att namnet och domänportföljen ingår i upplägget.)
+        (Namnet och domänportföljen ingår i upplägget.)
       </div>
     </div>
 
-    <hr class="divider">
-
-    <!-- BILDSEKTION (FÖRBEREDD) -->
-    <h1>Visuell riktning</h1>
-
-    <p>
-      Strikt typografi och ett ärligt bildspråk: produktbilder och ögonblick tagna som av en privatperson
-      (mobil/kompaktkamera). Inget reklamigt — bara verkligt.
-    </p>
-
-    <div class="gallery">
-      <!-- Byt ut placeholders mot egna bilder när du vill -->
-      <div class="shot">Lägg bild: <em>shot-1.jpg</em></div>
-      <div class="shot">Lägg bild: <em>shot-2.jpg</em></div>
-      <div class="shot">Lägg bild: <em>shot-3.jpg</em></div>
+    <!-- BILDER (STÄMNING) -->
+    <div class="images">
+      <!-- Byt filnamn när du laddar upp egna bilder -->
+      <img src="image-1.jpg" alt="">
+      <img src="image-2.jpg" alt="">
+      <img src="image-3.jpg" alt="">
     </div>
 
     <div class="note">
