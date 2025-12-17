@@ -11,12 +11,14 @@
       --text: #000;
       --muted: #555;
       --bg: #fff;
-      --col: 760px; /* textkolumn-bredd */
+      --col: 760px;         /* textkolumn-bredd */
+      --bottomH: 230px;     /* höjd på nederblocket */
     }
 
     body{
       margin: 0;
       padding: 60px;
+      padding-bottom: calc(60px + var(--bottomH)); /* gör plats för fixed-blocket */
       font-family: Arial, Helvetica, sans-serif;
       background: var(--bg);
       color: var(--text);
@@ -86,45 +88,44 @@
     }
 
     @media (max-width: 900px){
-      body{ padding: 28px; }
+      body{
+        padding: 28px;
+        padding-bottom: calc(28px + var(--bottomH));
+      }
     }
 
-    /* Nedersta "urklippet": bild vänster + svart fält höger */
-    .bottom-block{
-      max-width: var(--col);
-      margin-top: 36px;
+    /* ===== NEDERBLOCK: dikt mot webbläsarens vänster & botten ===== */
+    .bottom-strip{
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100vw;
+      height: var(--bottomH);
       display: grid;
-      grid-template-columns: auto 1fr;
-      align-items: end; /* dikt mot botten */
+      grid-template-columns: auto 1fr; /* bildens bredd + resten svart */
+      align-items: end;
+      z-index: 999;
     }
 
-    .bottom-block img{
-      display: block;
-      width: auto;
-      height: auto;
-      max-height: 230px; /* justera om du vill större/mindre */
-      filter: grayscale(100%);
-    }
-
-    .bottom-block .black{
-      background: #000;
+    .bottom-strip img{
       height: 100%;
-      min-height: 230px; /* matchar max-height på bilden */
+      width: auto;
+      display: block;
+      filter: grayscale(100%);
+      object-fit: contain;
+      object-position: left bottom;
     }
 
-    /* Mobil: gör blocket lite mer robust */
+    .bottom-strip .black{
+      height: 100%;
+      background: #000;
+    }
+
+    /* Mobil: minska höjden lite så den inte tar över */
     @media (max-width: 520px){
+      :root{ --bottomH: 170px; }
+
       h1{ font-size: 26px; }
-      .bottom-block{
-        grid-template-columns: 1fr;
-      }
-      .bottom-block img{
-        width: 100%;
-        max-height: none;
-      }
-      .bottom-block .black{
-        min-height: 140px;
-      }
     }
   </style>
 </head>
@@ -171,12 +172,13 @@
       This is a concept. Not a live service.
     </div>
 
-    <!-- NEDERSTA LOGOBLOCKET (bild + svart fält) -->
-    <div class="bottom-block">
-      <img src="bottom-image.jpg" alt="">
-      <div class="black"></div>
-    </div>
-
   </div>
+
+  <!-- NEDERBLOCK (dikt vänster & botten i webbläsaren) -->
+  <div class="bottom-strip">
+    <img src="bottom-image.jpg" alt="">
+    <div class="black"></div>
+  </div>
+
 </body>
 </html>
