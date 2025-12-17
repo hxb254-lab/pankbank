@@ -11,14 +11,19 @@
       --text: #000;
       --muted: #555;
       --bg: #fff;
-      --col: 760px;         /* textkolumn-bredd */
-      --bottomH: 230px;     /* höjd på nederblocket */
+      --col: 760px;
+
+      /* maxhöjd på nederblocket (bilden styr höjden upp till detta) */
+      --bottomMaxH: 240px;
     }
 
     body{
       margin: 0;
       padding: 60px;
-      padding-bottom: calc(60px + var(--bottomH)); /* gör plats för fixed-blocket */
+
+      /* gör plats för fixed-blocket */
+      padding-bottom: calc(60px + var(--bottomMaxH));
+
       font-family: Arial, Helvetica, sans-serif;
       background: var(--bg);
       color: var(--text);
@@ -90,7 +95,7 @@
     @media (max-width: 900px){
       body{
         padding: 28px;
-        padding-bottom: calc(28px + var(--bottomH));
+        padding-bottom: calc(28px + var(--bottomMaxH));
       }
     }
 
@@ -100,31 +105,39 @@
       left: 0;
       bottom: 0;
       width: 100vw;
-      height: var(--bottomH);
+
       display: grid;
       grid-template-columns: auto 1fr; /* bildens bredd + resten svart */
-      align-items: end;
+      align-items: stretch;
+
       z-index: 999;
+      background: transparent; /* viktigt: ingen svart "bakgrund" här */
     }
 
+    /* vänster cell (vit, så svart inte "blöder") */
+    .bottom-strip .photo{
+      background: #fff;
+      display: flex;
+      align-items: flex-end;   /* dikt botten */
+    }
+
+    /* bilden: visa HELA bilden, ingen kapning */
     .bottom-strip img{
-      height: 100%;
-      width: auto;
       display: block;
+      width: auto;
+      height: auto;
+      max-height: var(--bottomMaxH);
       filter: grayscale(100%);
-      object-fit: contain;
-      object-position: left bottom;
     }
 
+    /* höger cell: svarta fältet */
     .bottom-strip .black{
-      height: 100%;
       background: #000;
     }
 
-    /* Mobil: minska höjden lite så den inte tar över */
+    /* Mobil: mindre maxhöjd så den inte tar över */
     @media (max-width: 520px){
-      :root{ --bottomH: 170px; }
-
+      :root{ --bottomMaxH: 170px; }
       h1{ font-size: 26px; }
     }
   </style>
@@ -133,10 +146,8 @@
 <body>
   <div class="container">
 
-    <!-- LOGO -->
     <img class="logo" src="logo.png" alt="Pankbank">
 
-    <!-- HUVUDBUDSKAP -->
     <h1>En modern pantbank för elektronik</h1>
 
     <p>
@@ -154,7 +165,6 @@
 
     <hr class="divider">
 
-    <!-- DOMÄNER -->
     <p>
       I samband med konceptet finns följande domäner säkrade:
     </p>
@@ -163,9 +173,7 @@
       <div>• <code>pankbanken.se</code></div>
       <div>• <code>pankbanken.com</code></div>
       <div>• <code>pankbank.se</code></div>
-      <div class="meta">
-        (Namnet och domänportföljen ingår i upplägget.)
-      </div>
+      <div class="meta">(Namnet och domänportföljen ingår i upplägget.)</div>
     </div>
 
     <div class="note">
@@ -174,9 +182,11 @@
 
   </div>
 
-  <!-- NEDERBLOCK (dikt vänster & botten i webbläsaren) -->
+  <!-- Nederblock: bild (vänster) + svart fält (höger), dikt mot vänster & botten -->
   <div class="bottom-strip">
-    <img src="bottom-image.jpg" alt="">
+    <div class="photo">
+      <img src="bottom-image.jpg" alt="">
+    </div>
     <div class="black"></div>
   </div>
 
