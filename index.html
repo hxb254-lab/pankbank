@@ -100,6 +100,23 @@
     @media (max-width: 900px){
       body{ padding: 28px; }
     }
+
+    /* Logotyp-urklipp med bild */
+.logo-cutout{
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-top: 80px;
+}
+
+.logo-cutout-image{
+  width: 100%;
+  height: 320px; /* justera vid behov */
+  background-image: url("bottom-image.jpg");
+  background-size: cover;
+  background-position: left bottom;
+  background-repeat: no-repeat;
+}
   </style>
 </head>
 
@@ -154,5 +171,9 @@
     </div>
 
   </div>
+  <!-- BILDBLOCK SOM LOGOUTSKÄRNING -->
+<div class="logo-cutout">
+  <div class="logo-cutout-image"></div>
+</div>
 </body>
 </html>
