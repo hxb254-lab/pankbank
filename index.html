@@ -12,12 +12,14 @@
       --text: #000;
       --muted: #555;
       --bg: #fff;
+
+      /* Sätts lika med body padding så vi kan "blöda" ut blocket till vänster */
+      --pagePad: 60px;
     }
 
     body{
       margin: 0;
-      padding: 60px;
-      padding-bottom: 320px; /* plats för bilden längst ner */
+      padding: var(--pagePad);
       font-family: Arial, Helvetica, sans-serif;
       background: var(--bg);
       color: var(--text);
@@ -85,13 +87,11 @@
       max-width: var(--col);
     }
 
-    /* ===== BILD LÄNGST NER ===== */
+    /* ===== NEDERBILD: ligger EFTER content men är dikt vänster i webbläsaren ===== */
     .bottom-image{
-      position: fixed;
-      left: 0;
-      bottom: 0;
-      width: var(--col);   /* exakt samma bredd som textkolumn */
-      z-index: 10;
+      width: var(--col);                   /* bildens högra kant = textkolumnens högra kant */
+      margin-left: calc(var(--pagePad) * -1); /* flytta ut ur body-padding till webbläsarens vänsterkant */
+      margin-top: 36px;
     }
 
     .bottom-image img{
@@ -102,16 +102,16 @@
     }
 
     @media (max-width: 900px){
-      body{
-        padding: 28px;
-        padding-bottom: 220px;
-      }
+      :root{ --pagePad: 28px; }
     }
 
     @media (max-width: 520px){
       h1{ font-size: 26px; }
+
+      /* På mobil: låt bilden bli fullbredd, fortfarande dikt vänster */
       .bottom-image{
-        width: 100vw; /* på mobil: full bredd */
+        width: calc(100vw);
+        margin-left: calc(var(--pagePad) * -1);
       }
     }
   </style>
@@ -120,10 +120,8 @@
 <body>
   <div class="container">
 
-    <!-- LOGO -->
     <img class="logo" src="logo.png" alt="Pankbank">
 
-    <!-- HUVUDBUDSKAP -->
     <h1>En modern pantbank för elektronik</h1>
 
     <p>
@@ -149,21 +147,18 @@
       <div>• <code>pankbanken.se</code></div>
       <div>• <code>pankbanken.com</code></div>
       <div>• <code>pankbank.se</code></div>
-      <div class="meta">
-        (Namnet och domänportföljen ingår i upplägget.)
-      </div>
+      <div class="meta">(Namnet och domänportföljen ingår i upplägget.)</div>
     </div>
 
     <div class="note">
       This is a concept. Not a live service.
     </div>
 
-  </div>
+    <!-- Bilden ligger SIST (efter content), men är dikt vänster i webbläsaren -->
+    <div class="bottom-image">
+      <img src="bottom-image.jpg" alt="">
+    </div>
 
-  <!-- BILD: dikt vänster + botten, linjerar med textkolumn -->
-  <div class="bottom-image">
-    <img src="bottom-image.jpg" alt="">
   </div>
-
 </body>
 </html>
