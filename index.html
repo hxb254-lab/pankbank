@@ -7,19 +7,18 @@
 
   <style>
     :root{
-      --max: 980px;
-      --col: 760px;
+      --max: 980px;     /* container maxbredd (logons “högerkant”) */
       --text: #000;
       --muted: #555;
       --bg: #fff;
 
-      /* Sätts lika med body padding så vi kan "blöda" ut blocket till vänster */
-      --pagePad: 60px;
+      --pagePad: 60px;  /* samma som sidans padding */
     }
 
     body{
       margin: 0;
-      padding: var(--pagePad);
+      /* OBS: ingen padding i botten så bilden kan ligga dikt mot sidans botten */
+      padding: var(--pagePad) var(--pagePad) 0 var(--pagePad);
       font-family: Arial, Helvetica, sans-serif;
       background: var(--bg);
       color: var(--text);
@@ -45,7 +44,7 @@
     p{
       font-size: 18px;
       line-height: 1.7;
-      max-width: var(--col);
+      max-width: 760px;
       margin: 0 0 18px 0;
     }
 
@@ -57,13 +56,13 @@
       border: none;
       border-top: 2px solid #000;
       margin: 42px 0;
-      max-width: var(--col);
+      max-width: 760px;
     }
 
     .domains{
       font-size: 16px;
       line-height: 1.6;
-      max-width: var(--col);
+      max-width: 760px;
     }
 
     .domains code{
@@ -84,14 +83,19 @@
       margin-top: 52px;
       font-size: 14px;
       color: var(--muted);
-      max-width: var(--col);
+      max-width: 760px;
     }
 
-    /* ===== NEDERBILD: ligger EFTER content men är dikt vänster i webbläsaren ===== */
+    /* ===== NEDERBILD: efter content, dikt vänster, högerkant = containerns högerkant ===== */
     .bottom-image{
-      width: var(--col);                   /* bildens högra kant = textkolumnens högra kant */
-      margin-left: calc(var(--pagePad) * -1); /* flytta ut ur body-padding till webbläsarens vänsterkant */
+      /* börjar vid webbläsarens vänsterkant */
+      margin-left: calc(var(--pagePad) * -1);
+
+      /* bredden blir: padding + containerbredd => slutar exakt vid containerns högerkant */
+      width: calc(var(--pagePad) + var(--max));
+
       margin-top: 36px;
+      margin-bottom: 0; /* ingen luft under */
     }
 
     .bottom-image img{
@@ -103,14 +107,18 @@
 
     @media (max-width: 900px){
       :root{ --pagePad: 28px; }
+      body{ padding: var(--pagePad) var(--pagePad) 0 var(--pagePad); }
+      .bottom-image{
+        width: calc(var(--pagePad) + var(--max));
+        margin-left: calc(var(--pagePad) * -1);
+      }
     }
 
+    /* På smala skärmar: låt bilden gå fullbredd men fortfarande dikt vänster */
     @media (max-width: 520px){
       h1{ font-size: 26px; }
-
-      /* På mobil: låt bilden bli fullbredd, fortfarande dikt vänster */
       .bottom-image{
-        width: calc(100vw);
+        width: 100vw;
         margin-left: calc(var(--pagePad) * -1);
       }
     }
@@ -154,7 +162,7 @@
       This is a concept. Not a live service.
     </div>
 
-    <!-- Bilden ligger SIST (efter content), men är dikt vänster i webbläsaren -->
+    <!-- SISTA ELEMENTET: dikt vänster och slutar vid logons/container-högerkant -->
     <div class="bottom-image">
       <img src="bottom-image.jpg" alt="">
     </div>
